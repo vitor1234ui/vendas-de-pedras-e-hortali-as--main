@@ -1,0 +1,20 @@
+@startuml
+title HortaControl - Diagrama de Contexto
+
+actor "Produtor Rural" as produtor
+
+rectangle "HortaControl" as sistema
+
+rectangle "Produtos" as produtos
+rectangle "Colheitas" as colheitas
+rectangle "Perdas" as perdas
+rectangle "Vendas" as vendas
+
+produtor --> sistema : Utiliza o sistema
+
+sistema --> produtos : Cadastra produtos
+sistema --> colheitas : Registra colheitas
+sistema --> perdas : Registra perdas
+sistema --> vendas : Registra vendas
+
+@enduml
