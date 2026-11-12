@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HortaControl</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f8f3;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        header h1 {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 17px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 40px auto;
+        }
+
+        .titulo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .titulo h2 {
+            color: #2e7d32;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .titulo p {
+            color: #666;
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+        }
+
+        .icone {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .card h3 {
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+
+        .botao {
+            display: inline-block;
+            background: #2e7d32;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .botao:hover {
+            background: #1b5e20;
+        }
+
+        footer {
+            text-align: center;
+            color: #777;
+            padding: 30px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🌱 HortaControl</h1>
+        <p>Controle de estoque, colheitas, perdas e vendas</p>
+    </header>
+
+    <div class="container">
+
+        <div class="titulo">
+            <h2>Painel Principal</h2>
+            <p>Escolha uma opção para continuar</p>
+        </div>
+
+        <div class="menu">
+
+            <div class="card">
+                <div class="icone">🥬</div>
+                <h3>Produtos</h3>
+                <p>Cadastre e consulte suas hortaliças.</p>
+                <a class="botao" href="/produtos">Acessar</a>
+            </div>
+
+            <div class="card">
+                <div class="icone">🌱</div>
+                <h3>Colheitas</h3>
+                <p>Registre tudo que foi colhido.</p>
+                <a class="botao" href="/colheitas">Acessar</a>
+            </div>
+
+            <div class="card">
+                <div class="icone">⚠️</div>
+                <h3>Perdas</h3>
+                <p>Controle produtos que foram perdidos.</p>
+                <a class="botao" href="/perdas">Acessar</a>
+            </div>
+
+            <div class="card">
+                <div class="icone">🛒</div>
+                <h3>Vendas</h3>
+                <p>Registre suas vendas e valores.</p>
+                <a class="botao" href="/vendas">Acessar</a>
+            </div>
+
+            <div class="card">
+                <div class="icone">📦</div>
+                <h3>Estoque</h3>
+                <p>Veja o que ainda está disponível.</p>
+                <a class="botao" href="/estoque">Acessar</a>
+            </div>
+
+            <div class="card">
+                <div class="icone">📊</div>
+                <h3>Relatórios</h3>
+                <p>Confira os resultados do sistema.</p>
+                <a class="botao" href="/relatorios">Acessar</a>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        HortaControl © 2026
+    </footer>
+
+</body>
+</html>

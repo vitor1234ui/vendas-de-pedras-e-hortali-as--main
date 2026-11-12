@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Produtos - HortaControl</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f8f3;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 6px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 35px auto;
+        }
+
+        .formulario,
+        .lista {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 11px;
+            margin-bottom: 18px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #2e7d32;
+        }
+
+        button {
+            background: #2e7d32;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background: #1b5e20;
+        }
+
+        .produto {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+        }
+
+        .produto:last-child {
+            border-bottom: none;
+        }
+
+        .produto h3 {
+            color: #333;
+            margin-bottom: 7px;
+        }
+
+        .produto p {
+            color: #666;
+        }
+
+        .voltar {
+            display: inline-block;
+            background: #555;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 8px;
+        }
+
+        .voltar:hover {
+            background: #333;
+        }
+
+        .vazio {
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🌱 HortaControl</h1>
+        <p>Cadastro de Produtos</p>
+    </header>
+
+    <div class="container">
+
+        <div class="formulario">
+
+            <h2>➕ Cadastrar Produto</h2>
+
+            <form action="/produtos/cadastrar" method="POST">
+
+                <label>Nome do produto</label>
+                <input type="text" name="nome" placeholder="Ex: Alface" required>
+
+                <label>Unidade de medida</label>
+                <input type="text" name="unidade" placeholder="Ex: Kg, Unidade, Maço" required>
+
+                <label>Preço de venda</label>
+                <input type="number" name="preco" step="0.01" placeholder="Ex: 3.00" required>
+
+                <button type="submit">Cadastrar Produto</button>
+
+            </form>
+
+        </div>
+
+        <div class="lista">
+
+            <h2>🥬 Produtos cadastrados</h2>
+
+            {% if produtos %}
+
+                {% for produto in produtos %}
+
+                    <div class="produto">
+
+                        <h3>{{ produto[1] }}</h3>
+
+                        <p>
+                            Unidade: {{ produto[2] }}
+                        </p>
+
+                        <p>
+                            Preço: R$ {{ "%.2f"|format(produto[3]) }}
+                        </p>
+
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <p class="vazio">
+                    Nenhum produto cadastrado.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+        <a class="voltar" href="/">
+            ← Voltar para o início
+        </a>
+
+    </div>
+
+</body>
+
+</html>

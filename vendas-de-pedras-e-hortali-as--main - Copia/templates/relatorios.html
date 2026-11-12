@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Relatórios - HortaControl</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f8f3;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 6px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 35px auto;
+        }
+
+        .titulo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .titulo h2 {
+            color: #2e7d32;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .titulo p {
+            color: #666;
+        }
+
+        .resumo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+        }
+
+        .card .icone {
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .numero {
+            color: #2e7d32;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .dinheiro {
+            color: #1b5e20;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .produtos {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+        }
+
+        .produtos h2 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+
+        .produto {
+            border-bottom: 1px solid #ddd;
+            padding: 18px 0;
+        }
+
+        .produto:last-child {
+            border-bottom: none;
+        }
+
+        .produto h3 {
+            color: #333;
+            margin-bottom: 12px;
+        }
+
+        .dados {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .dado {
+            background: #f5f5f5;
+            padding: 12px;
+            border-radius: 7px;
+            color: #555;
+        }
+
+        .disponivel {
+            background: #e8f5e9;
+            color: #1b5e20;
+            font-weight: bold;
+        }
+
+        .vazio {
+            color: #777;
+        }
+
+        .voltar {
+            display: inline-block;
+            background: #555;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .voltar:hover {
+            background: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🌱 HortaControl</h1>
+        <p>Relatórios do sistema</p>
+    </header>
+
+    <div class="container">
+
+        <div class="titulo">
+            <h2>📊 Relatório Geral</h2>
+            <p>Resumo das atividades da sua produção.</p>
+        </div>
+
+        <div class="resumo">
+
+            <div class="card">
+                <div class="icone">🌾</div>
+                <h3>Total Colhido</h3>
+                <div class="numero">
+                    {{ total_colhido }}
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="icone">⚠️</div>
+                <h3>Total Perdido</h3>
+                <div class="numero">
+                    {{ total_perdido }}
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="icone">🛒</div>
+                <h3>Total Vendido</h3>
+                <div class="numero">
+                    {{ total_vendido }}
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="icone">💰</div>
+                <h3>Total em Vendas</h3>
+                <div class="dinheiro">
+                    R$ {{ "%.2f"|format(total_dinheiro) }}
+                </div>
+            </div>
+
+        </div>
+
+        <div class="produtos">
+
+            <h2>🥬 Resumo por Produto</h2>
+
+            {% if produtos %}
+
+                {% for produto in produtos %}
+
+                    <div class="produto">
+
+                        <h3>{{ produto[0] }}</h3>
+
+                        <div class="dados">
+
+                            <div class="dado">
+                                🌾 Colhido: {{ produto[1] }}
+                            </div>
+
+                            <div class="dado">
+                                ⚠️ Perdido: {{ produto[2] }}
+                            </div>
+
+                            <div class="dado">
+                                🛒 Vendido: {{ produto[3] }}
+                            </div>
+
+                            <div class="dado disponivel">
+                                📦 Disponível: {{ produto[4] }}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <p class="vazio">
+                    Nenhum produto cadastrado.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+        <a class="voltar" href="/">
+            ← Voltar para o início
+        </a>
+
+    </div>
+
+</body>
+
+</html>

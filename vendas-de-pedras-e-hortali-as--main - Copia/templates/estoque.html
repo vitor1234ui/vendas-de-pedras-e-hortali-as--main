@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Estoque - HortaControl</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f8f3;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 6px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 35px auto;
+        }
+
+        .titulo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .titulo h2 {
+            color: #2e7d32;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .titulo p {
+            color: #666;
+        }
+
+        .produtos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 22px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+        }
+
+        .card h3 {
+            color: #2e7d32;
+            font-size: 21px;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .info {
+            padding: 9px 0;
+            color: #555;
+        }
+
+        .disponivel {
+            margin-top: 15px;
+            padding: 14px;
+            background: #e8f5e9;
+            border-radius: 8px;
+            color: #1b5e20;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .vazio {
+            background: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+            color: #777;
+        }
+
+        .voltar {
+            display: inline-block;
+            background: #555;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .voltar:hover {
+            background: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🌱 HortaControl</h1>
+        <p>Controle de Estoque</p>
+    </header>
+
+    <div class="container">
+
+        <div class="titulo">
+            <h2>📦 Estoque de Hortaliças</h2>
+            <p>Acompanhe o que foi colhido, perdido, vendido e o que ainda está disponível.</p>
+        </div>
+
+        {% if estoque %}
+
+            <div class="produtos">
+
+                {% for item in estoque %}
+
+                    <div class="card">
+
+                        <h3>🥬 {{ item[0] }}</h3>
+
+                        <div class="info">
+                            🌾 <strong>Colhido:</strong>
+                            {{ item[1] }}
+                        </div>
+
+                        <div class="info">
+                            ⚠️ <strong>Perdido:</strong>
+                            {{ item[2] }}
+                        </div>
+
+                        <div class="info">
+                            🛒 <strong>Vendido:</strong>
+                            {{ item[3] }}
+                        </div>
+
+                        <div class="disponivel">
+                            📦 Disponível: {{ item[4] }}
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="vazio">
+
+                <h2>📦 Estoque vazio</h2>
+
+                <p>Nenhum produto cadastrado ainda.</p>
+
+            </div>
+
+        {% endif %}
+
+        <a class="voltar" href="/">
+            ← Voltar para o início
+        </a>
+
+    </div>
+
+</body>
+
+</html>

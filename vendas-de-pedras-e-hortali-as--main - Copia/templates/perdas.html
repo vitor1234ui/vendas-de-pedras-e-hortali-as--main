@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Perdas - HortaControl</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f8f3;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 6px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 35px auto;
+        }
+
+        .formulario,
+        .lista {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 11px;
+            margin-bottom: 18px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        select:focus,
+        input:focus {
+            outline: none;
+            border-color: #2e7d32;
+        }
+
+        button {
+            background: #2e7d32;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background: #1b5e20;
+        }
+
+        .perda {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+        }
+
+        .perda:last-child {
+            border-bottom: none;
+        }
+
+        .perda h3 {
+            color: #333;
+            margin-bottom: 7px;
+        }
+
+        .perda p {
+            color: #666;
+            margin: 5px 0;
+        }
+
+        .motivo {
+            color: #c62828;
+            font-weight: bold;
+        }
+
+        .vazio {
+            color: #777;
+        }
+
+        .voltar {
+            display: inline-block;
+            background: #555;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 8px;
+        }
+
+        .voltar:hover {
+            background: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🌱 HortaControl</h1>
+        <p>Controle de Perdas</p>
+    </header>
+
+    <div class="container">
+
+        <div class="formulario">
+
+            <h2>➕ Registrar Perda</h2>
+
+            <form action="/perdas/cadastrar" method="POST">
+
+                <label>Produto</label>
+
+                <select name="id_produto" required>
+
+                    {% for produto in produtos %}
+
+                        <option value="{{ produto[0] }}">
+                            {{ produto[1] }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+                <label>Quantidade perdida</label>
+
+                <input
+                    type="number"
+                    name="quantidade"
+                    step="0.01"
+                    placeholder="Ex: 2"
+                    required
+                >
+
+                <label>Motivo da perda</label>
+
+                <input
+                    type="text"
+                    name="motivo"
+                    placeholder="Ex: Produto estragou"
+                    required
+                >
+
+                <label>Data da perda</label>
+
+                <input
+                    type="date"
+                    name="data_perda"
+                    required
+                >
+
+                <button type="submit">
+                    Registrar Perda
+                </button>
+
+            </form>
+
+        </div>
+
+        <div class="lista">
+
+            <h2>⚠️ Perdas registradas</h2>
+
+            {% if perdas %}
+
+                {% for perda in perdas %}
+
+                    <div class="perda">
+
+                        <h3>🥬 {{ perda[1] }}</h3>
+
+                        <p>
+                            <strong>Quantidade:</strong>
+                            {{ perda[2] }}
+                        </p>
+
+                        <p class="motivo">
+                            Motivo: {{ perda[3] }}
+                        </p>
+
+                        <p>
+                            <strong>Data:</strong>
+                            {{ perda[4] }}
+                        </p>
+
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <p class="vazio">
+                    Nenhuma perda registrada.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+        <a class="voltar" href="/">
+            ← Voltar para o início
+        </a>
+
+    </div>
+
+</body>
+
+</html>

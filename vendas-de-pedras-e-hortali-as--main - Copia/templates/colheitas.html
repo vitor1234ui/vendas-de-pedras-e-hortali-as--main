@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Colheitas - HortaControl</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f8f3;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 6px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 35px auto;
+        }
+
+        .formulario,
+        .lista {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 11px;
+            margin-bottom: 18px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        select:focus,
+        input:focus {
+            outline: none;
+            border-color: #2e7d32;
+        }
+
+        button {
+            background: #2e7d32;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background: #1b5e20;
+        }
+
+        .colheita {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+        }
+
+        .colheita:last-child {
+            border-bottom: none;
+        }
+
+        .colheita h3 {
+            color: #333;
+            margin-bottom: 7px;
+        }
+
+        .colheita p {
+            color: #666;
+            margin: 5px 0;
+        }
+
+        .vazio {
+            color: #777;
+        }
+
+        .voltar {
+            display: inline-block;
+            background: #555;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 8px;
+        }
+
+        .voltar:hover {
+            background: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🌱 HortaControl</h1>
+        <p>Controle de Colheitas</p>
+    </header>
+
+    <div class="container">
+
+        <div class="formulario">
+
+            <h2>➕ Cadastrar Colheita</h2>
+
+            <form action="/colheitas/cadastrar" method="POST">
+
+                <label>Produto</label>
+
+                <select name="id_produto" required>
+
+                    {% for produto in produtos %}
+
+                        <option value="{{ produto[0] }}">
+                            {{ produto[1] }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+                <label>Quantidade colhida</label>
+
+                <input
+                    type="number"
+                    name="quantidade"
+                    step="0.01"
+                    placeholder="Ex: 20"
+                    required
+                >
+
+                <label>Data da colheita</label>
+
+                <input
+                    type="date"
+                    name="data_colheita"
+                    required
+                >
+
+                <button type="submit">
+                    Cadastrar Colheita
+                </button>
+
+            </form>
+
+        </div>
+
+        <div class="lista">
+
+            <h2>🌾 Colheitas cadastradas</h2>
+
+            {% if colheitas %}
+
+                {% for colheita in colheitas %}
+
+                    <div class="colheita">
+
+                        <h3>🥬 {{ colheita[1] }}</h3>
+
+                        <p>
+                            <strong>Quantidade:</strong>
+                            {{ colheita[2] }}
+                        </p>
+
+                        <p>
+                            <strong>Data:</strong>
+                            {{ colheita[3] }}
+                        </p>
+
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <p class="vazio">
+                    Nenhuma colheita cadastrada.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+        <a class="voltar" href="/">
+            ← Voltar para o início
+        </a>
+
+    </div>
+
+</body>
+
+</html>
